@@ -796,12 +796,6 @@
           "type": "credentials",
           "info": "Your access token.",
           "required": true
-        },
-        {
-          "name": "searchQuery",
-          "type": "String",
-          "info": "Search string.",
-          "required": true
         }
       ],
       "callbacks": [
@@ -1122,9 +1116,9 @@
           "required": true
         },
         {
-          "name": "userId",
+          "name": "message",
           "type": "String",
-          "info": "User id.",
+          "info": "Notification to add in the user feed.",
           "required": true
         }
       ],

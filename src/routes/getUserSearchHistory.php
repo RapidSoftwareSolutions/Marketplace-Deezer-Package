@@ -4,7 +4,7 @@ $app->post('/api/Deezer/getUserSearchHistory', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accessToken','searchQuery']);
+    $validateRes = $checkRequest->validate($request, ['accessToken']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -14,8 +14,6 @@ $app->post('/api/Deezer/getUserSearchHistory', function ($request, $response) {
     $data = [];
 
     $data['access_token'] = $post_data['args']['accessToken'];
-    $data['q'] = $post_data['args']['searchQuery'];
-    
 
     $query_str = "http://api.deezer.com/search/history";
     $client = $this->httpClient;

@@ -18,7 +18,7 @@ $app->post('/api/Deezer/addCommentToArtist', function ($request, $response) {
     $data['comment'] = $post_data['args']['comment'];
     
 
-    $query_str = "http://api.deezer.com/artist/{$data['albumId']}/comments";
+    $query_str = "http://api.deezer.com/artist/{$data['artistId']}/comments";
     $client = $this->httpClient;
 
     try {

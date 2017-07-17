@@ -4,7 +4,7 @@ $app->post('/api/Deezer/addNotificationsInUserFeed', function ($request, $respon
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accessToken','userId']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','message']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -14,10 +14,10 @@ $app->post('/api/Deezer/addNotificationsInUserFeed', function ($request, $respon
     $data = [];
 
     $data['access_token'] = $post_data['args']['accessToken'];
-    $data['userId'] = $post_data['args']['userId'];
+    $data['message'] = $post_data['args']['message'];
     
 
-    $query_str = "http://api.deezer.com/user/{$data['userId']}/history";
+    $query_str = "http://api.deezer.com/user/notifications";
     $client = $this->httpClient;
 
     try {
