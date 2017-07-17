@@ -1,0 +1,2754 @@
+{
+  "package": "Deezer",
+  "tagline": "Deezer API",
+  "description": "Deezer Simple API provides a nice set of services to build up web applications allowing the discovery of Deezer's music catalogue.",
+  "image": "https://logo.clearbit.com/deezer.com",
+  "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Deezer-Package",
+  "keywords": [
+    "API",
+    "deezer",
+    "music",
+    "playlist",
+    "artist",
+    "song"
+  ],
+  "accounts": {
+    "domain": "deezer.com",
+    "credentials": [
+      "appId",
+      "appSecret",
+      "code",
+      "accessToken"
+    ]
+  },
+  "blocks": [
+    {
+      "name": "getAccessToken",
+      "description": "Returns access token.",
+      "args": [
+        {
+          "name": "appId",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "The id of your application, generated when you created your application on developer page.",
+          "required": true
+        },
+        {
+          "name": "appSecret",
+          "vendorName": "secret",
+          "type": "credentials",
+          "info": "The app secret is available from the Application setting page and should not be shared with anyone or embedded in any code that you will distribute (you should use the client-side flow for these scenarios).",
+          "required": true
+        },
+        {
+          "name": "code",
+          "type": "credentials",
+          "info": "The code you received at the previous step.",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "Select",
+          "options": ["json","xml"],
+          "info": "The way you want to output the access_token. If not specifed, this will output the access_token as a string to parse (like in the example below)",
+          "required": true
+        }
+      ],
+      "url" : "https://connect.deezer.com/oauth/access_token.php",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getAlbumComments",
+      "description": "Return a list of album's comments. Represented by an array of Comment objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "type": "String",
+          "info": "The Deezer album id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/album/{$data['albumId']}/comments",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getAlbumFans",
+      "description": "Return a list of album's fans. Represented by an array of User objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "type": "String",
+          "info": "The Deezer album id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/album/{$data['albumId']}/fans",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getAlbumTracks",
+      "description": "Return a list of album's tracks. Represented by an array of Track objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "type": "String",
+          "info": "The Deezer album id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/album/{$data['albumId']}/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistTop5Tracks",
+      "description": "Get the top 5 tracks of an artist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/top",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistAlbums",
+      "description": "Return a list of artist's albums. Represented by an array of Album objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/albums",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistComments",
+      "description": "Return a list of artist's comments. Represented by an array of Comment objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/comments",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistFans",
+      "description": "Return a list of artist's fans. Represented by an array of User objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/fans",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getRelatedArtists",
+      "description": "Return a list of related artists. Represented by an array of Artist objects",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/related",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTracks",
+      "description": "Return a list of tracks. Represented by an array of Track object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/radio",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistPlaylists",
+      "description": "Return a list of artist's playlists. Represented by an array of Playlist object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "The artist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['artistId']}/playlists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTopTracks",
+      "description": "Returns the Top tracks.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/chart/0/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTopAlbums",
+      "description": "Returns the Top albums.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/chart/0/albums",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTopArtists",
+      "description": "Returns the Top artists.",
+      "args": [
+
+      ],
+      "url" : "http://api.deezer.com/chart/0/artists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTopPlaylists",
+      "description": "Returns the Top playlists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/chart/0/playlists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getEditorsChoiceAlbums",
+      "description": "Return a list of albums selected every week by the Deezer Team.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/editorial/0/selection",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getEditorsChoice",
+      "description": "This method returns four lists : Top track, Top album, Top artist and Top playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/editorial/0/charts",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getCountryNewReleases",
+      "description": "This method returns the new releases per genre for the current country.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/editorial/0/releases",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistsForGenre",
+      "description": "Returns all artists for a genre.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/genre/0/artists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getRadiosForGenre",
+      "description": "Returns all radios for a genre",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/genre/0/radios",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserOptions",
+      "description": "Get the user's options.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/options",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getPlaylistComments",
+      "description": "Return a list of playlist's comments. Represented by an array of Comment objects",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "The playlist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/comments",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getPlaylistFans",
+      "description": "Return a list of playlist's fans. Represented by an array of User objects.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "The playlist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/fans",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+        "name": "getPlaylistTracks",
+      "description": "Return a list of playlist's tracks. Represented by an array of Track object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "The playlist's Deezer id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getRadioByGenre",
+      "description": "Returns a list of radio splitted by genre.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/radio/genres",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTop5Radios",
+      "description": "Return the top radios (5 radios)",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/radio/top",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getRadioFirst40Tracks",
+      "description": "Get first 40 tracks in the radio",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/radio/6/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getPersonalRadioByGenre",
+      "description": "Returns a list of personal radio splitted by genre (as MIX in website)",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/radio/lists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchAlbums",
+      "description": "Search albums.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/album",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchArtists",
+      "description": "Search artists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/artist",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserSearchHistory",
+      "description": "Get user search history.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/history",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchPlaylists",
+      "description": "Search playlists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/playlist",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchRadio",
+      "description": "Search radio.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/radio",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchTracks",
+      "description": "Search tracks.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/track",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "searchUsers",
+      "description": "Search users.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "searchQuery",
+          "vendorName": "q",
+          "type": "String",
+          "info": "Search string.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/search/user",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFavoriteAlbums",
+      "description": "Return a list of user's favorite albums. Represented by an array of Album object",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/me/albums",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFavoriteArtists",
+      "description": "Return a list of user's favorite artists. Represented by an array of Artist object",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/me/artists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFlowTracks",
+      "description": "Returns a list of user's flow tracks, represented by an array of Track object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFolder",
+      "description": "Return a list of user's Folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/folders",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFollowing",
+      "description": "Return a list of user's following, represented by an array of User object",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/followings",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFollowers",
+      "description": "Return a list of user's followers, represented by an array of User object",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/followers",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserRecentlyPlayedTracks",
+      "description": "Returns a list of the recently played tracks.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/history",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addNotificationsInUserFeed",
+      "description": "Use this method in post only, to add notifications in user feed.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/history",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserPermissions",
+      "description": "Return the user's Permissions granted to the application.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/permissions",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserPersonnalSongs",
+      "description": "Return a list of user's personnal song, represented by an array of Tracks.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/personal_songs",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserPlaylist",
+      "description": "Return a list of user's public Playlist, represented by an array of Playlist object. Permission is needed to return private playlists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/playlists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserRadios",
+      "description": "Return a list of user's favorite Radios, represented by an array of Radio object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/radios",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getUserFavoriteTracks",
+      "description": "Return a list of user's favorite tracks. Represented by an array of Track object.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getAlbumsRecommendations",
+      "description": "Return a list of user's recommendations albums.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/albums",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getArtistsRecommendations",
+      "description": "Return a list of user's recommendations artists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/artists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getPlaylistsRecommendations",
+      "description": "Return a list of user's recommendations playlists.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/playlists",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getTracksRecommendations",
+      "description": "Return a list of user's recommendations tracks.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/tracks",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "getRadiosRecommendations",
+      "description": "Return a list of user's recommendations radios.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/recommendations/radios",
+      "method": "get",
+      "paramsType": "query",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addCommentToAlbum",
+      "description": "Add a comment to the album.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "comment",
+          "type": "String",
+          "info": "The content of the comment.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/album/{$data['albumId']}/comments",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addCommentToArtist",
+      "description": "Add a comment to the artist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "type": "String",
+          "info": "Artist id.",
+          "required": true
+        },
+        {
+          "name": "comment",
+          "type": "String",
+          "info": "The content of the comment.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/artist/{$data['albumId']}/comments",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "setBookmarkOnEpisode",
+      "description": "Sets a bookmark on the episode.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "episodeId",
+          "type": "String",
+          "info": "Artist id.",
+          "required": true
+        },
+        {
+          "name": "offset",
+          "type": "Number",
+          "info": "The offset where the bookmark is set, must be between 0 and 100.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/episode/{$data['episodeId']}/bookmark",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "renameFolder",
+      "description": "Rename the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "info": "The new title of the folder.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addPlaylistToFolder",
+      "description": "Add a playlist to the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}/items",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addAlbumToFolder",
+      "description": "Add an album to the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The album id.",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}/items",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "ratePlaylist",
+      "description": "Rate the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        },
+        {
+          "name": "note",
+          "type": "String",
+          "info": "An int [1-5].",
+          "required": true
+        }
+
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "updatePlaylist",
+      "description": "Update the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "markPlaylistAsSeen",
+      "description": "Mark the playlist as seen.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/seen",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addCommentToPlaylist",
+      "description": "Add a comment to the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        },
+        {
+          "name": "comment",
+          "type": "String",
+          "info": "The content of the comment.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/comments",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addTrackToPlaylist",
+      "description": "Add a track to the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        },
+        {
+          "name": "songs",
+          "type": "String",
+          "info": "A comma separated list of track ids.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/tracks",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "orderTracksInPlaylist",
+      "description": "Order tracks in the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "Playlist id.",
+          "required": true
+        },
+        {
+          "name": "order",
+          "type": "String",
+          "info": "A comma separated list of track ids.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/tracks",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "updatePersonalTrack",
+      "description": "Update a personal track.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "trackId",
+          "type": "String",
+          "info": "Track id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/track/{$data['trackId']}",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addAlbumToUserLibrary",
+      "description": "Add an album to the user's library.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The id of the album.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/albums",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addArtistToUserFavorites",
+      "description": "Add an artist to the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The id of the artist.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/artist",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "createFolder",
+      "description": "Create a folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "info": "The title of the folder.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/folders",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "followUser",
+      "description": "Follow user.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "followingUser",
+          "vendorName": "user_id",
+          "type": "String",
+          "info": "The user id to follow.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/followings",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "createPlaylist",
+      "description": "Create a playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "info": "The title of the new playlist.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/playlists",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addPlaylistToUserFavorites",
+      "description": "Add a playlist to the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/playlists",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addPodcastToUserFavorites",
+      "description": "Add a podcast to the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "podcastId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The podcast id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/podcasts",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addRadioToUserFavorites",
+      "description": "Add a radio to the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "radioId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The radio id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/radios",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "addTrackToUserFavorites",
+      "description": "Add a track to the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "User id.",
+          "required": true
+        },
+        {
+          "name": "trackId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The id of the track.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/tracks",
+      "method": "post",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeComment",
+      "description": "Remove a comment.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "commentId",
+          "type": "String",
+          "info": "Comment id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/comment/{$data['commentId']}",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeBookmarkOnEpisode",
+      "description": "Removes the bookmark on the episode.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "episodeId",
+          "type": "String",
+          "info": "Episode id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/episode/{$data['episodeId']}/bookmark",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "deleteFolder",
+      "description": "Delete the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removePlaylistFromFolder",
+      "description": "Remove a playlist from the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}/items",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeAlbumFromFolder",
+      "description": "Remove an album from the folder.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "folderId",
+          "type": "String",
+          "info": "Folder id.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The album id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/folder/{$data['folderId']}/items",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "deletePlaylist",
+      "description": "Delete the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeTracksFromPlaylist",
+      "description": "Delete the playlist.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        },
+        {
+          "name": "songs",
+          "type": "String",
+          "info": "A comma separated list of track ids.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/playlist/{$data['playlistId']}/tracks",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "deletePersonalTrack",
+      "description": "Delete a personal track.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "trackId",
+          "type": "String",
+          "info": "The track id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/track/{$data['trackId']}",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeAlbumFromUserLibrary",
+      "description": "Remove an album from the user's library.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "albumId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The album id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/albums",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeArtistFromUserFavorites",
+      "description": "Remove an artist from the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "artistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The artist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/artists",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "unfollowUser",
+      "description": "Unfollow user.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "user",
+          "vendorName": "user_id",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/followings",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removePlaylistFromUserFavorites",
+      "description": "Remove a playlist from the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "playlistId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The playlist id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/playlists",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removePodcastFromUserFavorites",
+      "description": "Remove a podcast from the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "podcastId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The podcast id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/podcasts",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeRadioFromUserFavorites",
+      "description": "Remove a radio from the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "radioId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The podcast id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/radios",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    },
+    {
+      "name": "removeTrackFromUserFavorites",
+      "description": "Remove a track from the user's favorites.",
+      "args": [
+        {
+          "name": "accessToken",
+          "vendorName": "{{snake_shake}}",
+          "type": "credentials",
+          "info": "Your access token.",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "String",
+          "info": "The user id.",
+          "required": true
+        },
+        {
+          "name": "trackId",
+          "vendorName": "{{snake_shake}}",
+          "type": "String",
+          "info": "The podcast id.",
+          "required": true
+        }
+      ],
+      "url" : "http://api.deezer.com/user/{$data['userId']}/tracks",
+      "method": "delete",
+      "paramsType": "form_params",
+      "callbacks": [{
+        "name": "error",
+        "info": "Error"
+      }, {
+        "name": "success",
+        "info": "Success"
+      }]
+    }
+  ]
+}
