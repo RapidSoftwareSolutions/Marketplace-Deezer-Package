@@ -18,7 +18,7 @@ $app->post('/api/Deezer/addArtistToUserFavorites', function ($request, $response
     $data['artist_id'] = $post_data['args']['artistId'];
     
 
-    $query_str = "http://api.deezer.com/user/{$data['userId']}/artists";
+    $query_str = "http://api.deezer.com/user/{$data['userId']}/artist";
     $client = $this->httpClient;
 
     try {
