@@ -23,7 +23,7 @@ $app->post('/api/Deezer/removePodcastFromUserFavorites', function ($request, $re
 
     try {
         $resp = $client->delete($query_str, [
-            'form_params'=>$data
+            'query'=>$data
         ]);
         $responseBody = $resp->getBody()->getContents();
 

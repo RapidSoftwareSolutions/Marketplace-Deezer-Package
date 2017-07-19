@@ -23,7 +23,7 @@ $app->post('/api/Deezer/removeTracksFromPlaylist', function ($request, $response
 
     try {
         $resp = $client->delete($query_str, [
-            'form_params'=>$data
+            'query'=>$data
         ]);
         $responseBody = $resp->getBody()->getContents();
 
